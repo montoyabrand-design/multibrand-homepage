@@ -1,26 +1,222 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── ELYZIOR BRAND TOKENS ──────────────────────────────────── */
+[data-brand="elyzior"] {
+  /* Backgrounds */
+  --color-bg-page:              #ffffff;
+  --color-bg-surface:           #f3f3f3;
+  --color-bg-inverse:           #0b183d;
+  --color-bg-inverse-deep:      #03091a;
+  --color-bg-inverse-deepest:   #01040c;
+
+  /* Text */
+  --color-text-primary:         #0b183d;
+  --color-text-secondary:       #636363;
+  --color-text-on-inverse:      #ffffff;
+  --color-text-on-inverse-muted:rgba(255,255,255,0.5);
+  --color-text-accent:          #ac7d4f;
+  --color-text-accent-warm:     #c3a882;
+
+  /* Borders */
+  --color-border-default:       #c2c7d7;
+  --color-border-accent:        #ac7d4f;
+  --color-border-emphasis:      #693f1f;
+  --color-border-emphasis-sub:  rgba(105,63,31,0.4);
+
+  /* Actions */
+  --color-action-primary-bg:    #0b183d;
+  --color-action-primary-fg:    #ffffff;
+  --color-action-secondary-bg:  #ffffff;
+  --color-action-secondary-fg:  #0b183d;
+  --color-action-tertiary-bg:   #ffffff;
+  --color-action-tertiary-fg:   #01040c;
+
+  /* Typography */
+  --font-display:               var(--font-instrument-serif);
+  --font-heading:               var(--font-instrument-serif);
+  --font-body:                  var(--font-geist);
+  --font-ui:                    var(--font-libre-franklin);
+
+  /* Type scale */
+  --size-display:  120px;
+  --size-h1:       80px;
+  --size-h2:       72px;
+  --size-h3:       48px;
+  --size-h4:       36px;
+  --size-h5:       24px;
+  --size-body-lg:  20px;
+  --size-body:     16px;
+  --size-body-sm:  14px;
+  --size-label:    14px;
+
+  /* Tracking */
+  --tracking-display: 9.6px;
+  --tracking-h1:      6.4px;
+  --tracking-h2:      8px;
+  --tracking-h3:      2px;
+  --tracking-body:    1px;
+  --tracking-label:   4px;
+  --tracking-nav:     1.12px;
+
+  /* Spacing */
+  --section-v:      160px;
+  --section-h:      120px;
+  --section-gap:    80px;
+  --layout-gap:     48px;
+  --card-gap:       24px;
+  --comp-lg:        32px;
+  --comp-md:        16px;
+  --comp-sm:        8px;
+  --comp-gap-lg:    40px;
+  --comp-gap-md:    24px;
+  --comp-gap-sm:    8px;
+
+  /* Extended semantic colors */
+  --color-text-muted:                  rgba(255,255,255,0.5);
+  --color-text-disabled:               rgba(11,24,61,0.3);
+  --color-text-placeholder:            #636363;
+  --color-icon-primary:                #0b183d;
+  --color-icon-secondary:              #636363;
+  --color-bg-highlight:                #f3f3f3;
+
+  /* Action hover states */
+  --color-action-primary-hover:        #1a2f5a;
+  --color-action-secondary-hover:      #f3f3f3;
+  --color-action-tertiary-hover:       #f3f3f3;
+
+  /* Action disabled states */
+  --color-action-primary-disabled-bg:  rgba(11,24,61,0.3);
+  --color-action-primary-disabled-fg:  rgba(255,255,255,0.5);
+
+  /* Border radius */
+  --radius-none:  0px;
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-pill:  100px;
+
+  /* Elevation */
+  --elevation-card:   0px 4px 8px rgba(0,0,0,0.04);
+  --elevation-modal:  0px 24px 48px rgba(0,0,0,0.16);
+
+  /* Opacity primitives */
+  --opacity-dim:    0.5;
+  --opacity-subtle: 0.3;
+  --opacity-border: 0.4;
+  --opacity-page:   0.1;
 }
 
+/* ── VIBE BRAND TOKENS ─────────────────────────────────────── */
+[data-brand="vibe"] {
+  /* Backgrounds */
+  --color-bg-page:              #ffffff;
+  --color-bg-surface:           #f8fafc;
+  --color-bg-inverse:           #1e2a3a;
+  --color-bg-inverse-deep:      #0f1923;
+  --color-bg-inverse-deepest:   #080e15;
+
+  /* Text */
+  --color-text-primary:         #1e2a3a;
+  --color-text-secondary:       #64748b;
+  --color-text-on-inverse:      #ffffff;
+  --color-text-on-inverse-muted:rgba(255,255,255,0.6);
+  --color-text-accent:          #0ea5e9;
+  --color-text-accent-warm:     #fbbf24;
+
+  /* Borders */
+  --color-border-default:       #e2e8f0;
+  --color-border-accent:        #0ea5e9;
+  --color-border-emphasis:      #0284c7;
+  --color-border-emphasis-sub:  rgba(2,132,199,0.3);
+
+  /* Actions */
+  --color-action-primary-bg:    #0ea5e9;
+  --color-action-primary-fg:    #ffffff;
+  --color-action-secondary-bg:  #ffffff;
+  --color-action-secondary-fg:  #1e2a3a;
+  --color-action-tertiary-bg:   #38bdf8;
+  --color-action-tertiary-fg:   #080e15;
+
+  /* Typography */
+  --font-display:               var(--font-sora);
+  --font-heading:               var(--font-sora);
+  --font-body:                  var(--font-geist);
+  --font-ui:                    var(--font-geist);
+
+  /* Type scale — tighter than Elyzior */
+  --size-display:  72px;
+  --size-h1:       64px;
+  --size-h2:       48px;
+  --size-h3:       36px;
+  --size-h4:       24px;
+  --size-h5:       20px;
+  --size-body-lg:  16px;
+  --size-body:     16px;
+  --size-body-sm:  14px;
+  --size-label:    12px;
+
+  /* Tracking — tighter for efficiency */
+  --tracking-display: 2px;
+  --tracking-h1:      1px;
+  --tracking-h2:      1px;
+  --tracking-h3:      0px;
+  --tracking-body:    0px;
+  --tracking-label:   1.12px;
+  --tracking-nav:     0px;
+
+  /* Spacing — compact */
+  --section-v:      64px;
+  --section-h:      80px;
+  --section-gap:    40px;
+  --layout-gap:     24px;
+  --card-gap:       16px;
+  --comp-lg:        24px;
+  --comp-md:        12px;
+  --comp-sm:        8px;
+  --comp-gap-lg:    24px;
+  --comp-gap-md:    16px;
+  --comp-gap-sm:    8px;
+}
+
+/* ── TAILWIND v4 THEME ─────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand-aware color aliases */
+  --color-bg-page:              var(--color-bg-page);
+  --color-bg-surface:           var(--color-bg-surface);
+  --color-bg-inverse:           var(--color-bg-inverse);
+  --color-bg-inverse-deep:      var(--color-bg-inverse-deep);
+  --color-bg-inverse-deepest:   var(--color-bg-inverse-deepest);
+  --color-text-primary:         var(--color-text-primary);
+  --color-text-secondary:       var(--color-text-secondary);
+  --color-text-on-inverse:      var(--color-text-on-inverse);
+  --color-text-accent:          var(--color-text-accent);
+  --color-text-accent-warm:     var(--color-text-accent-warm);
+  --color-border-default:       var(--color-border-default);
+  --color-border-accent:        var(--color-border-accent);
+  --color-action-primary-bg:    var(--color-action-primary-bg);
+  --color-action-primary-fg:    var(--color-action-primary-fg);
+  --color-action-secondary-bg:  var(--color-action-secondary-bg);
+  --color-action-secondary-fg:  var(--color-action-secondary-fg);
+
+  /* Fonts */
+  --font-display:    var(--font-display);
+  --font-heading:    var(--font-heading);
+  --font-body:       var(--font-body);
+  --font-ui:         var(--font-ui);
+  --font-sans:       var(--font-geist);
+
+  /* Radius */
+  --radius-pill:     var(--radius-pill);
+
+  /* Elevation */
+  --elevation-card:  var(--elevation-card);
+  --elevation-modal: var(--elevation-modal);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ── BASE ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-page, #ffffff);
+  color: var(--color-text-primary, #111111);
+  font-family: var(--font-body, sans-serif);
 }
