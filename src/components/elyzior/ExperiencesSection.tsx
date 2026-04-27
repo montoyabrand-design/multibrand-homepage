@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { EASE, fadeUp, staggerContainer, staggerContainerDelayed, VP } from "./animations";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const experiences = [
   {
@@ -128,19 +129,9 @@ function ExperienceCard({ title, description, imageUrl, objectPosition, alwaysSh
 }
 
 export function ExperiencesSection() {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 639px)');
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Detect mobile on mount
-  const sectionRef = useCallback((node: HTMLElement | null) => {
-    if (node) {
-      const mq = window.matchMedia('(max-width: 639px)');
-      setIsMobile(mq.matches);
-      const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-      mq.addEventListener('change', handler);
-    }
-  }, []);
 
   const handleScroll = useCallback(() => {
     const el = scrollRef.current;
@@ -151,7 +142,6 @@ export function ExperiencesSection() {
 
   return (
     <section
-      ref={sectionRef}
       className="w-full flex flex-col items-center gap-6"
       style={{
         backgroundColor: "var(--color-bg-inverse)",
