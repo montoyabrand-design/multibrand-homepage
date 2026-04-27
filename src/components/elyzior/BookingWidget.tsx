@@ -12,23 +12,19 @@ const fields = [
 export function BookingWidget() {
   return (
     <motion.section
-      className="w-full border-b flex items-center justify-center gap-8"
+      className="w-full border-b flex items-center justify-center gap-8 px-[165px] py-[40px] max-sm:flex-col max-sm:px-6"
       style={{
         borderColor: "var(--color-action-primary-bg)",
         backgroundColor: "var(--color-bg-page)",
-        paddingLeft: "165px",
-        paddingRight: "165px",
-        paddingTop: "40px",
-        paddingBottom: "40px",
       }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, ease: EASE, delay: 0.3 }}
     >
       {/* Fields */}
-      <div className="flex flex-1 items-center gap-6">
+      <div className="flex flex-1 items-center gap-6 max-sm:flex-col max-sm:gap-0 max-sm:w-full">
         {fields.map((field) => (
-          <div key={field.label} className="flex flex-1 flex-col gap-2 min-w-0">
+          <div key={field.label} className="flex flex-1 flex-col gap-2 min-w-0 max-sm:w-full">
             <span
               className="text-[16px] tracking-[1.28px]"
               style={{
@@ -63,7 +59,7 @@ export function BookingWidget() {
 
       {/* Search button */}
       <button
-        className="flex items-center gap-3 rounded-full shrink-0 transition-opacity hover:opacity-80"
+        className="flex items-center gap-3 rounded-full shrink-0 transition-opacity hover:opacity-80 max-sm:w-full max-sm:mt-6 max-sm:justify-center"
         style={{
           backgroundColor: "var(--color-action-primary-bg)",
           color: "var(--color-action-primary-fg)",
