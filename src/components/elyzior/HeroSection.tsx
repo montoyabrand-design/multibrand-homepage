@@ -4,9 +4,7 @@ import { useScroll, useTransform, motion } from 'framer-motion';
 import type { UserType } from "@/tokens";
 import { Navigation } from "./Navigation";
 import { EASE, slowZoom } from "./animations";
-
-const SECTION_H = 855;
-const EXIT_END  = SECTION_H * 0.2;
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const heroImage = "/elyzior/hero.png";
 
@@ -14,14 +12,31 @@ export function HeroSection({ userType }: { userType: UserType }) {
   const headline =
     userType === "loyalty" ? "Welcome Back" : "A Sublime Experience";
 
+  const isMobile = useMediaQuery('(max-width: 639px)');
+
   const { scrollY } = useScroll();
 
-  // Scroll-based exit: opacity 1→0, y 0→-40 past 20% of section height
-  const exitOpacity = useTransform(scrollY, [0, EXIT_END], [1, 0]);
-  const exitY       = useTransform(scrollY, [0, EXIT_END], [0, -40]);
+  // Scroll-based exit: opacity 1→0, y 0→-40 past 20% of section height.
+  // Function overload reads viewport on every scroll tick so EXIT_END is dynamic.
+  const exitOpacity = useTransform(scrollY, (y) => {
+    const end = isMobile
+      ? window.innerHeight * 0.7 * 0.2
+      : 855 * 0.2;
+    return 1 - Math.min(y / end, 1);
+  });
+
+  const exitY = useTransform(scrollY, (y) => {
+    const end = isMobile
+      ? window.innerHeight * 0.7 * 0.2
+      : 855 * 0.2;
+    return Math.min(y / end, 1) * -40;
+  });
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ minHeight: `${SECTION_H}px` }}>
+    <section
+      className="relative w-full overflow-hidden"
+      style={{ minHeight: isMobile ? '70vh' : '855px' }}
+    >
 
       {/* Background with slow zoom */}
       <motion.div className="absolute inset-0" {...slowZoom}>
@@ -44,7 +59,7 @@ export function HeroSection({ userType }: { userType: UserType }) {
 
       {/* Scroll-exit wrapper — opacity and y driven by scroll position */}
       <motion.div
-        className="absolute top-[537px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className={`absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 ${isMobile ? 'top-1/2 -translate-y-1/2' : 'top-[537px]'}`}
         style={{ opacity: exitOpacity, y: exitY }}
       >
         {/* Headline entrance animation on load */}
@@ -54,11 +69,11 @@ export function HeroSection({ userType }: { userType: UserType }) {
           transition={{ duration: 1.2, ease: EASE }}
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "120px",
-            letterSpacing: "9.6px",
+            fontSize: isMobile ? '48px' : '120px',
+            letterSpacing: isMobile ? '3px' : '9.6px',
             lineHeight: "normal",
           }}
-          className="text-white text-center whitespace-nowrap"
+          className="text-white text-center whitespace-nowrap max-sm:whitespace-normal max-sm:px-6"
         >
           {headline}
         </motion.p>
