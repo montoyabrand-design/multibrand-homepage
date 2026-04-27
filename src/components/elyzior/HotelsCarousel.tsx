@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useRef, useState, useCallback } from 'react';
 import type { UserType } from "@/tokens";
 import { HotelCard } from "./HotelCard";
 import { fadeUp, staggerContainer, staggerContainerDelayed, VP } from "./animations";
@@ -39,6 +40,9 @@ const headerStagger = staggerContainer;
 const cardStagger   = staggerContainerDelayed;
 
 export function HotelsCarousel({ userType }: { userType: UserType }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const orderedHotels =
     userType === "loyalty"
       ? [...hotels].sort(
@@ -46,9 +50,16 @@ export function HotelsCarousel({ userType }: { userType: UserType }) {
         )
       : hotels;
 
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / orderedHotels.length;
+    setActiveIndex(Math.round(el.scrollLeft / cardWidth));
+  }, [orderedHotels.length]);
+
   return (
     <section
-      className="relative overflow-hidden"
+      className="relative overflow-hidden max-sm:pl-4 max-sm:pr-0"
       style={{
         backgroundColor: "var(--color-bg-surface)",
         paddingTop: "120px",
@@ -67,7 +78,7 @@ export function HotelsCarousel({ userType }: { userType: UserType }) {
       >
         <motion.h2
           variants={fadeUp}
-          className="leading-none"
+          className="leading-none max-sm:text-[40px]"
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "var(--size-h1)",
@@ -79,7 +90,7 @@ export function HotelsCarousel({ userType }: { userType: UserType }) {
         </motion.h2>
         <motion.p
           variants={fadeUp}
-          className="text-[16px] leading-5 tracking-[1.92px] w-[486px]"
+          className="text-[16px] leading-5 tracking-[1.92px] max-w-[486px] max-sm:w-full"
           style={{
             fontFamily: "var(--font-body)",
             color: "var(--color-text-secondary)",
@@ -93,19 +104,37 @@ export function HotelsCarousel({ userType }: { userType: UserType }) {
 
       {/* Cards */}
       <motion.div
+        ref={scrollRef}
+        onScroll={handleScroll}
         variants={cardStagger}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="flex gap-6 overflow-x-auto pb-4 pr-16"
+        className="flex gap-6 max-sm:gap-3 overflow-x-auto pb-4 pr-16 max-sm:snap-x max-sm:snap-mandatory"
         style={{ scrollbarWidth: "none" }}
       >
         {orderedHotels.map((hotel) => (
-          <motion.div key={hotel.city} variants={fadeUp}>
+          <motion.div key={hotel.city} variants={fadeUp} className="max-sm:snap-start max-sm:shrink-0">
             <HotelCard {...hotel} />
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Dot indicators — mobile only */}
+      <div className="hidden max-sm:flex gap-2 justify-center mt-4 pr-4">
+        {orderedHotels.map((_, i) => (
+          <div
+            key={i}
+            className="h-[2px] rounded-full transition-all duration-300"
+            style={{
+              width: i === activeIndex ? '14px' : '5px',
+              backgroundColor: i === activeIndex
+                ? 'var(--color-text-primary)'
+                : 'var(--color-border-default)',
+            }}
+          />
+        ))}
+      </div>
     </section>
   );
 }

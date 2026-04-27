@@ -12,7 +12,7 @@ interface HotelCardProps {
 export function HotelCard({ city, description, imageUrl }: HotelCardProps) {
   return (
     <motion.article
-      className="flex flex-col shrink-0 w-[359px] overflow-hidden"
+      className="flex flex-col shrink-0 w-[359px] max-sm:w-[85vw] overflow-hidden"
       style={{
         backgroundColor: "var(--color-bg-page)",
         boxShadow: "var(--elevation-card)",
@@ -20,7 +20,7 @@ export function HotelCard({ city, description, imageUrl }: HotelCardProps) {
       {...hoverScaleCard}
     >
       {/* Image */}
-      <div className="relative h-[349px] w-full overflow-hidden">
+      <div className="relative h-[349px] max-sm:h-[240px] w-full overflow-hidden">
         <motion.img
           src={imageUrl}
           alt={city}
