@@ -22,23 +22,19 @@ const columns = [
 export function Footer() {
   return (
     <footer
-      className="w-full flex flex-col"
+      className="w-full flex flex-col pt-[80px] px-[100px] pb-[40px] max-sm:px-6 max-sm:pt-12 max-sm:pb-8"
       style={{
         backgroundColor: "var(--color-bg-inverse-deepest)",
-        paddingTop: "80px",
-        paddingLeft: "100px",
-        paddingRight: "100px",
-        paddingBottom: "40px",
       }}
     >
       {/* Main row */}
       <div
-        className="flex items-start justify-between pb-[61px] border-b mb-0"
+        className="flex items-start justify-between pb-[61px] border-b mb-0 max-sm:flex-col max-sm:gap-10"
         style={{ borderColor: "var(--color-border-emphasis)" }}
       >
         {/* Brand */}
         <div className="flex flex-col gap-1">
-          <img src={logo} alt="ELYZIOR" className="h-[56px] w-[211px] object-contain" />
+          <img src={logo} alt="ELYZIOR" className="h-[56px] w-[211px] object-contain max-sm:h-[36px] max-sm:w-[135px]" />
           <span
             className="text-[16px] tracking-[0.72px] italic"
             style={{
@@ -51,7 +47,7 @@ export function Footer() {
         </div>
 
         {/* Link columns */}
-        <div className="flex gap-16">
+        <div className="flex gap-16 max-sm:grid max-sm:grid-cols-2 max-sm:gap-x-8 max-sm:gap-y-10 max-sm:w-full">
           {columns.map((col) => (
             <div key={col.heading} className="flex flex-col gap-6">
               <span
@@ -86,7 +82,7 @@ export function Footer() {
 
       {/* Legal row */}
       <div
-        className="flex items-center justify-between text-[12px] tracking-[0.72px] py-8"
+        className="flex items-center justify-between text-[12px] tracking-[0.72px] py-8 max-sm:flex-col max-sm:items-start max-sm:gap-1"
         style={{
           fontFamily: "var(--font-body)",
           color: "var(--color-border-default)",
