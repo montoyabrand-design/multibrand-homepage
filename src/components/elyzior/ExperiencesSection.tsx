@@ -43,7 +43,7 @@ function ExperienceCard({ title, description, imageUrl, objectPosition, alwaysSh
   return (
     <motion.article
       variants={fadeUp}
-      className="relative overflow-hidden flex-1 max-sm:w-[85vw] max-sm:flex-none"
+      className="relative overflow-hidden w-full max-sm:w-[85vw]"
       style={{ height: isMobile ? '320px' : '498px' }}
       onHoverStart={() => { if (!alwaysShowText) setHovered(true); }}
       onHoverEnd={() => { if (!alwaysShowText) setHovered(false); }}
@@ -209,7 +209,7 @@ export function ExperiencesSection() {
         style={{ gap: "4px" }}
       >
         {experiences.map((exp) => (
-          <div key={exp.title} className="max-sm:snap-start max-sm:shrink-0">
+          <div key={exp.title} className="flex-1 max-sm:flex-none max-sm:snap-start max-sm:shrink-0">
             <ExperienceCard
               {...exp}
               alwaysShowText={isMobile}
