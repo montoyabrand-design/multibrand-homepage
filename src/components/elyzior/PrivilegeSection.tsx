@@ -115,13 +115,9 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
           <motion.div
             key={pillar.numeral}
             variants={fadeUp}
-            className="flex flex-col gap-6 border-r last:border-r-0 max-sm:border-r-0 max-sm:border-t first:max-sm:border-t-0 max-sm:pt-8 max-sm:pb-10 max-sm:px-6"
+            className="flex flex-col gap-6 border-r last:border-r-0 pt-[56px] pb-[80px] px-[48px] max-sm:border-r-0 max-sm:border-t first:max-sm:border-t-0 max-sm:pt-8 max-sm:pb-10 max-sm:px-6"
             style={{
               borderColor: "var(--color-border-emphasis)",
-              paddingTop: "56px",
-              paddingBottom: "80px",
-              paddingLeft: "48px",
-              paddingRight: "48px",
             }}
           >
             <span
