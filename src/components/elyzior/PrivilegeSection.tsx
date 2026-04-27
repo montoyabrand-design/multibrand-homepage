@@ -41,7 +41,7 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
       }}
     >
       {/* Hero area */}
-      <div className="flex flex-col items-center pt-[120px] pb-[80px] gap-6">
+      <div className="flex flex-col items-center pt-[120px] pb-[80px] gap-6 max-sm:px-6">
         <motion.div
           variants={heroStagger}
           initial="hidden"
@@ -68,7 +68,7 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
           {/* Title */}
           <motion.p
             variants={fadeUp}
-            className="text-center"
+            className="text-center max-sm:text-[32px]"
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "var(--size-h2)",
@@ -87,7 +87,7 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
           initial="hidden"
           whileInView="visible"
           viewport={VP}
-          className="text-center w-full"
+          className="text-center w-full max-sm:text-[16px]"
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "24px",
@@ -109,13 +109,13 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
         initial="hidden"
         whileInView="visible"
         viewport={VP}
-        className="grid grid-cols-4 w-full"
+        className="grid grid-cols-4 max-sm:grid-cols-1 w-full"
       >
         {pillars.map((pillar) => (
           <motion.div
             key={pillar.numeral}
             variants={fadeUp}
-            className="flex flex-col gap-6 border-r last:border-r-0"
+            className="flex flex-col gap-6 border-r last:border-r-0 max-sm:border-r-0 max-sm:border-t first:max-sm:border-t-0 max-sm:pt-8 max-sm:pb-10 max-sm:px-6"
             style={{
               borderColor: "var(--color-border-emphasis)",
               paddingTop: "56px",
@@ -125,7 +125,7 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
             }}
           >
             <span
-              className="text-[48px] leading-none"
+              className="text-[48px] max-sm:text-[40px] leading-none"
               style={{
                 fontFamily: "var(--font-display)",
                 color: "var(--color-border-emphasis)",
@@ -163,10 +163,10 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
         initial="hidden"
         whileInView="visible"
         viewport={VP}
-        className="flex items-center justify-center pt-14 pb-20"
+        className="flex items-center justify-center pt-14 pb-20 max-sm:px-6"
         style={{ backgroundColor: "var(--color-bg-inverse-deepest)" }}
       >
-        <Button hierarchy="tertiary" size="large">
+        <Button hierarchy="tertiary" size="large" className="max-sm:w-full max-sm:justify-center">
           {userType === "loyalty" ? "VIEW YOUR BENEFITS" : "REQUEST AN INVITATION"}
         </Button>
       </motion.div>
