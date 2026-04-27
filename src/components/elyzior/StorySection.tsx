@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { fadeUp, staggerContainer, slideInLeft, slideInRight, VP } from "./animations";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface StorySectionProps {
   eyebrow: string;
@@ -24,9 +25,14 @@ export function StorySection({
   imageRight = false,
   quote = false,
 }: StorySectionProps) {
+  const isMobile = useMediaQuery('(max-width: 639px)');
+
+  const textVariant = isMobile ? fadeUp : (imageRight ? slideInLeft : slideInRight);
+  const imageVariant = isMobile ? fadeUp : (imageRight ? slideInRight : slideInLeft);
+
   const textBlock = (
     <motion.div
-      variants={imageRight ? slideInLeft : slideInRight}
+      variants={textVariant}
       initial="hidden"
       whileInView="visible"
       viewport={VP}
@@ -37,7 +43,7 @@ export function StorySection({
         paddingRight: "var(--section-h)",
         backgroundColor: "var(--color-bg-page)",
       }}
-      className="w-1/2 shrink-0 flex flex-col justify-center"
+      className="w-1/2 shrink-0 flex flex-col justify-center max-sm:w-full max-sm:px-6 max-sm:py-12"
     >
       <motion.div
         variants={stagger}
@@ -59,7 +65,7 @@ export function StorySection({
 
         <motion.h2
           variants={fadeUp}
-          className="mb-8 leading-none"
+          className="mb-8 leading-none max-sm:text-[36px] max-sm:tracking-[2px]"
           style={{
             fontFamily: "var(--font-display)",
             fontSize: "var(--size-h2)",
@@ -117,11 +123,11 @@ export function StorySection({
 
   const imageBlock = (
     <motion.div
-      variants={imageRight ? slideInRight : slideInLeft}
+      variants={imageVariant}
       initial="hidden"
       whileInView="visible"
       viewport={VP}
-      className="w-1/2 shrink-0 overflow-hidden"
+      className="w-1/2 shrink-0 overflow-hidden max-sm:w-full max-sm:h-[280px]"
     >
       <img
         src={imageUrl}
@@ -132,8 +138,13 @@ export function StorySection({
   );
 
   return (
-    <section className="flex w-full min-h-screen" style={{ overflow: 'clip' }}>
-      {imageRight ? (
+    <section
+      className="flex w-full max-sm:flex-col"
+      style={{ minHeight: isMobile ? 'auto' : '100vh', overflow: 'clip' }}
+    >
+      {isMobile ? (
+        <>{imageBlock}{textBlock}</>
+      ) : imageRight ? (
         <>{textBlock}{imageBlock}</>
       ) : (
         <>{imageBlock}{textBlock}</>
