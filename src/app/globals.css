@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* ── BRICOLAGE GROTESQUE ───────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf") format("truetype");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── ELYZIOR BRAND TOKENS ──────────────────────────────────── */
 [data-brand="elyzior"] {
   /* Backgrounds */
@@ -110,71 +119,116 @@
   /* Backgrounds */
   --color-bg-page:              #ffffff;
   --color-bg-surface:           #f8fafc;
-  --color-bg-inverse:           #1e2a3a;
-  --color-bg-inverse-deep:      #0f1923;
-  --color-bg-inverse-deepest:   #080e15;
+  --color-bg-inverse:           #1a1a18;
+  --color-bg-inverse-deep:      #111110;
+  --color-bg-inverse-deepest:   #080807;
+  --color-bg-accent:            #d5eb47;
 
   /* Text */
-  --color-text-primary:         #1e2a3a;
-  --color-text-secondary:       #64748b;
+  --color-text-primary:         #1a1a18;
+  --color-text-secondary:       #636363;
   --color-text-on-inverse:      #ffffff;
   --color-text-on-inverse-muted:rgba(255,255,255,0.6);
-  --color-text-accent:          #0ea5e9;
-  --color-text-accent-warm:     #fbbf24;
+  --color-text-accent:          #d5eb47;
+  --color-text-accent-warm:     #c3a882;
 
   /* Borders */
-  --color-border-default:       #e2e8f0;
-  --color-border-accent:        #0ea5e9;
-  --color-border-emphasis:      #0284c7;
-  --color-border-emphasis-sub:  rgba(2,132,199,0.3);
+  --color-border-default:       #1a1a18;
+  --color-border-subtle:        #c2c7d7;
+  --color-border-accent:        #d5eb47;
 
   /* Actions */
-  --color-action-primary-bg:    #0ea5e9;
+  --color-action-primary-bg:    #1a1a18;
   --color-action-primary-fg:    #ffffff;
   --color-action-secondary-bg:  #ffffff;
-  --color-action-secondary-fg:  #1e2a3a;
-  --color-action-tertiary-bg:   #38bdf8;
-  --color-action-tertiary-fg:   #080e15;
+  --color-action-secondary-fg:  #1a1a18;
 
-  /* Typography */
-  --font-display:               var(--font-sora);
-  --font-heading:               var(--font-sora);
+  /* Extended semantic */
+  --color-text-muted:                  rgba(255,255,255,0.6);
+  --color-text-disabled:               rgba(26,26,24,0.3);
+  --color-text-placeholder:            #636363;
+  --color-icon-primary:                #1a1a18;
+  --color-icon-secondary:              #636363;
+  --color-bg-highlight:                #f8fafc;
+  --color-action-primary-hover:        #2d2d2b;
+  --color-action-secondary-hover:      #f8fafc;
+  --color-action-primary-disabled-bg:  rgba(26,26,24,0.3);
+  --color-action-primary-disabled-fg:  rgba(255,255,255,0.5);
+
+  /* Typography — families */
+  --font-display:               "Bricolage Grotesque", sans-serif;
+  --font-heading:               "Bricolage Grotesque", sans-serif;
   --font-body:                  var(--font-geist);
   --font-ui:                    var(--font-geist);
 
-  /* Type scale — tighter than Elyzior */
-  --size-display:  72px;
-  --size-h1:       64px;
-  --size-h2:       48px;
+  /* Typography — weights */
+  --font-weight-display:    700;
+  --font-weight-heading:    700;
+  --font-weight-subheading: 600;
+  --font-weight-body:       400;
+  --font-weight-ui:         700;
+  --font-weight-label:      500;
+
+  /* Type scale */
+  --size-display:  96px;
+  --size-h1:       72px;
+  --size-h2:       40px;
   --size-h3:       36px;
   --size-h4:       24px;
   --size-h5:       20px;
-  --size-body-lg:  16px;
+  --size-body-lg:  20px;
   --size-body:     16px;
   --size-body-sm:  14px;
   --size-label:    12px;
+  --size-micro:    11px;
 
-  /* Tracking — tighter for efficiency */
-  --tracking-display: 2px;
-  --tracking-h1:      1px;
-  --tracking-h2:      1px;
-  --tracking-h3:      0px;
-  --tracking-body:    0px;
-  --tracking-label:   1.12px;
-  --tracking-nav:     0px;
+  /* Tracking */
+  --tracking-display:  -3.84px;
+  --tracking-h1:       -2.16px;
+  --tracking-h2:       0px;
+  --tracking-eyebrow:  4px;
+  --tracking-nav:      1.12px;
+  --tracking-button:   1.92px;
+  --tracking-body-sm:  1.68px;
+  --tracking-label:    0.4px;
+  --tracking-body:     0px;
 
-  /* Spacing — compact */
-  --section-v:      64px;
-  --section-h:      80px;
-  --section-gap:    40px;
+  /* Line heights */
+  --line-height-display:  96px;
+  --line-height-h1:       82.8px;
+  --line-height-body-lg:  28px;
+  --line-height-body:     20px;
+  --line-height-body-sm:  20px;
+
+  /* Spacing */
+  --section-v:      120px;
+  --section-h:      48px;
+  --section-gap:    24px;
   --layout-gap:     24px;
-  --card-gap:       16px;
-  --comp-lg:        24px;
-  --comp-md:        12px;
+  --card-gap:       24px;
+  --comp-lg:        32px;
+  --comp-md:        20px;
   --comp-sm:        8px;
   --comp-gap-lg:    24px;
   --comp-gap-md:    16px;
   --comp-gap-sm:    8px;
+
+  /* Border radius */
+  --radius-none:  0px;
+  --radius-sm:    4px;
+  --radius-md:    16px;
+  --radius-lg:    24px;
+  --radius-pill:  120px;
+
+  /* Elevation */
+  --elevation-card:   0px 2px 4px rgba(0,0,0,0.06);
+  --elevation-modal:  0px 16px 32px rgba(0,0,0,0.12);
+
+  /* Opacity */
+  --opacity-dim:    0.6;
+  --opacity-subtle: 0.3;
+  --opacity-border: 0.4;
+  --opacity-page:   0.1;
 }
 
 /* ── TAILWIND v4 THEME ─────────────────────────────────────── */
