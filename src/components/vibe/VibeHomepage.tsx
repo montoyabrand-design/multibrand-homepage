@@ -84,12 +84,12 @@ const hotels: (HotelCardProps & { id: string })[] = [
 ];
 
 const amenitiesList = [
-  { icon: '📶', label: 'Free WiFi' },
-  { icon: '🥐', label: 'Breakfast' },
-  { icon: '🏋', label: 'Gym' },
-  { icon: '🚗', label: 'Parking' },
-  { icon: '🐾', label: 'Pet-friendly' },
-  { icon: '🍸', label: 'Bar' },
+  'Free WiFi',
+  'Breakfast',
+  'Gym',
+  'Parking',
+  'Pet-friendly',
+  'Bar',
 ];
 
 /* ── HEADING BLOCK ─────────────────────────────────────────── */
@@ -274,10 +274,10 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
           >
             {isLoyalty
               ? 'Your next stay in Berlin is 3 days away. Ready to explore more?'
-              : 'Everything you need. Nothing you don\'t.\nAffordable stays in top locations, ready when you are.'}
+              : <>Everything you need. Nothing you don&apos;t.<br />Affordable stays in top locations, ready when you are.</>}
           </p>
 
-          <Button variant="secondary" size="md">
+          <Button variant="primary" size="md">
             {isLoyalty ? 'Manage my stays' : 'Find your stay'}
           </Button>
         </div>
@@ -365,42 +365,16 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
         </div>
       </section>
 
-      {/* ── TRUST SIGNALS (first-time only) ─────────────────── */}
-      {!isLoyalty && (
-        <div
-          style={{
-            display:        'flex',
-            justifyContent: 'center',
-            gap:            '48px',
-            padding:        '24px 48px',
-            borderBottom:   '1px solid var(--color-border-default)',
-          }}
-        >
-          {[
-            { icon: '★', text: '4.7 average rating' },
-            { icon: '🏨', text: '500+ hotels worldwide' },
-            { icon: '🔒', text: 'Best price guarantee' },
-            { icon: '💬', text: '24/7 support' },
-          ].map((item) => (
-            <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>{item.icon}</span>
-              <span
-                style={{
-                  fontFamily:  'var(--font-body)',
-                  fontSize:    'var(--size-body-sm)',
-                  fontWeight:  'var(--font-weight-label)',
-                  color:       'var(--color-text-secondary)',
-                }}
-              >
-                {item.text}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-
       {/* ── EXPLORE CITIES ──────────────────────────────────── */}
-      <SectionWrapper>
+      <div
+        style={{
+          paddingTop:      'var(--section-v)',
+          paddingBottom:   'var(--section-v)',
+          paddingLeft:     'var(--section-h)',
+          paddingRight:    'var(--section-h)',
+          backgroundColor: 'var(--color-bg-surface)',
+        }}
+      >
         <div style={{ display: 'flex', marginBottom: '40px' }}>
           <WordBlock word="Explore" corners={{ tl: true }} size="h1" />
           <WordBlock word={isLoyalty ? 'Your Stays' : 'Cities'} corners={{ br: true }} size="h1" />
@@ -442,7 +416,7 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
             DISCOVER MORE CITIES <span>→</span>
           </a>
         </div>
-      </SectionWrapper>
+      </div>
 
       {/* ── BOOK DIRECT & SKIP EXTRAS ───────────────────────── */}
       <SectionWrapper inverse>
@@ -621,18 +595,14 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
             gap:                 '24px 48px',
           }}
         >
-          {amenitiesList.map((item) => (
+          {amenitiesList.map((label) => (
             <div
-              key={item.label}
+              key={label}
               style={{
-                display:      'flex',
-                alignItems:   'center',
-                gap:          '12px',
                 paddingBottom:'24px',
                 borderBottom: '1px solid var(--color-border-subtle)',
               }}
             >
-              <span style={{ fontSize: '24px' }}>{item.icon}</span>
               <span
                 style={{
                   fontFamily:  'var(--font-body)',
@@ -641,7 +611,7 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
                   color:       'var(--color-text-primary)',
                 }}
               >
-                {item.label}
+                {label}
               </span>
             </div>
           ))}
