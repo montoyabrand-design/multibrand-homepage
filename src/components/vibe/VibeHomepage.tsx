@@ -84,12 +84,18 @@ const hotels: (HotelCardProps & { id: string })[] = [
 ];
 
 const amenitiesList = [
-  'Free WiFi',
-  'Breakfast',
-  'Gym',
-  'Parking',
-  'Pet-friendly',
-  'Bar',
+  '24-Hour Front Desk With Concierge Services',
+  'Free Highspeed Wifi Throughout The Premises',
+  'Premium Toiletries In Every Room',
+  'Custom Furniture + Local Artwork',
+  'In-Room Safe + Smart TV',
+  'Unique Snack + Beverage Selection',
+  'Room Service Available',
+  'Curated Packages For Culture Seekers',
+  'Dedicated Coworking Spaces',
+  'Rooftop Access At Select Locations',
+  'Community Events + City Tours',
+  'Private Meeting Rooms',
 ];
 
 /* ── HEADING BLOCK ─────────────────────────────────────────── */
@@ -277,7 +283,7 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
               : <>Everything you need. Nothing you don&apos;t.<br />Affordable stays in top locations, ready when you are.</>}
           </p>
 
-          <Button variant="primary" size="md">
+          <Button variant="secondary" size="md" className="self-start">
             {isLoyalty ? 'Manage my stays' : 'Find your stay'}
           </Button>
         </div>
@@ -344,7 +350,7 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
               position:        'absolute',
               bottom:          '120px',
               left:            '-16px',
-              backgroundColor: 'var(--color-text-accent-warm)',
+              backgroundColor: 'var(--color-bg-accent)',
               padding:         '24px 32px',
               borderTopRightRadius: 'var(--radius-md)',
               display:         'flex',
@@ -372,7 +378,7 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
           paddingBottom:   'var(--section-v)',
           paddingLeft:     'var(--section-h)',
           paddingRight:    'var(--section-h)',
-          backgroundColor: 'var(--color-bg-surface)',
+          backgroundColor: '#f3f3f1',
         }}
       >
         <div style={{ display: 'flex', marginBottom: '40px' }}>
@@ -584,31 +590,45 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
 
       {/* ── AMENITIES ────────────────────────────────────────── */}
       <SectionWrapper>
-        <div style={{ display: 'flex', marginBottom: '48px' }}>
-          <WordBlock word="Amenities" corners={{ tl: true, br: true }} size="h1" />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '32px' }}>
+          <div style={{ display: 'flex' }}>
+            <WordBlock word="Amenities" corners={{ tl: true }} size="h1" />
+          </div>
+          <span
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize:   'var(--size-body-lg)',
+              fontWeight: 'var(--font-weight-body)',
+              color:      'var(--color-text-secondary)',
+            }}
+          >
+            We have everything you need
+          </span>
         </div>
 
         <div
           style={{
             display:             'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
-            gap:                 '24px 48px',
+            borderTop:           '1px solid var(--color-border-subtle)',
           }}
         >
           {amenitiesList.map((label) => (
             <div
               key={label}
               style={{
-                paddingBottom:'24px',
-                borderBottom: '1px solid var(--color-border-subtle)',
+                padding:     '24px 40px 24px 0',
+                borderBottom:'1px solid var(--color-border-subtle)',
               }}
             >
               <span
                 style={{
-                  fontFamily:  'var(--font-body)',
-                  fontSize:    'var(--size-body-lg)',
-                  fontWeight:  'var(--font-weight-body)',
-                  color:       'var(--color-text-primary)',
+                  fontFamily:    'var(--font-body)',
+                  fontSize:      'var(--size-label)',
+                  fontWeight:    'var(--font-weight-body)',
+                  color:         'var(--color-text-primary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: 'var(--tracking-label)',
                 }}
               >
                 {label}
@@ -622,47 +642,100 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
       <footer
         style={{
           display:         'flex',
-          alignItems:      'center',
-          justifyContent:  'space-between',
-          padding:         '24px 48px',
-          borderTop:       '1px solid var(--color-border-default)',
-          backgroundColor: 'var(--color-bg-page)',
+          flexDirection:   'column',
+          padding:         '65px 48px 32px',
+          backgroundColor: 'var(--color-bg-inverse-deepest)',
         }}
       >
-        <span
+        {/* Top row: wordmark + nav columns */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', paddingBottom: '48px' }}>
+          {/* Wordmark */}
+          <span
+            style={{
+              fontFamily:    'var(--font-display)',
+              fontSize:      '112px',
+              fontWeight:    'var(--font-weight-display)',
+              letterSpacing: '-4px',
+              lineHeight:    1,
+              color:         'var(--color-bg-inverse)',
+            }}
+          >
+            VIBE
+          </span>
+
+          {/* Link columns */}
+          <div style={{ display: 'flex', gap: '120px' }}>
+            {[
+              {
+                heading: 'CITIES',
+                links: ['São Paulo', 'New York', 'CDMX', 'Madrid', 'Medellín'],
+              },
+              {
+                heading: 'STAY',
+                links: ['Rooms', 'Coworking', 'Events', 'Long stays'],
+              },
+              {
+                heading: 'COMPANY',
+                links: ['About', 'Careers', 'Press', 'Contact'],
+              },
+            ].map((col) => (
+              <div key={col.heading} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <span
+                  style={{
+                    fontFamily:    'var(--font-body)',
+                    fontSize:      '10px',
+                    fontWeight:    'var(--font-weight-ui)',
+                    letterSpacing: '0.8px',
+                    textTransform: 'uppercase',
+                    color:         'var(--color-text-secondary)',
+                  }}
+                >
+                  {col.heading}
+                </span>
+                {col.links.map((link) => (
+                  <a
+                    key={link}
+                    href="#"
+                    style={{
+                      fontFamily:    'var(--font-body)',
+                      fontSize:      'var(--size-body-sm)',
+                      fontWeight:    'var(--font-weight-body)',
+                      color:         'var(--color-text-on-inverse)',
+                      textDecoration:'none',
+                    }}
+                  >
+                    {link}
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
           style={{
-            fontFamily:    'var(--font-display)',
-            fontSize:      'var(--size-h4)',
-            fontWeight:    'var(--font-weight-display)',
-            letterSpacing: '1px',
-            color:         'var(--color-text-primary)',
+            borderTop:      '1px solid var(--color-border-accent)',
+            paddingTop:     '25px',
+            display:        'flex',
+            justifyContent: 'space-between',
+            alignItems:     'center',
           }}
         >
-          VIBE
-        </span>
-        <span
-          style={{
-            fontFamily:  'var(--font-body)',
-            fontSize:    'var(--size-body-sm)',
-            color:       'var(--color-text-secondary)',
-          }}
-        >
-          © 2026 Skyline Group
-        </span>
-        <div style={{ display: 'flex', gap: '24px' }}>
-          {['Privacy', 'Terms', 'Cookies', 'Help'].map((l) => (
-            <a
-              key={l}
-              href="#"
+          {['© 2026 VIBE HOTELS', 'BY Skyline HOTELS'].map((text) => (
+            <span
+              key={text}
               style={{
                 fontFamily:    'var(--font-body)',
-                fontSize:      'var(--size-body-sm)',
+                fontSize:      'var(--size-label)',
+                fontWeight:    'var(--font-weight-body)',
+                letterSpacing: 'var(--tracking-label)',
+                textTransform: 'uppercase',
                 color:         'var(--color-text-secondary)',
-                textDecoration:'none',
               }}
             >
-              {l}
-            </a>
+              {text}
+            </span>
           ))}
         </div>
       </footer>
