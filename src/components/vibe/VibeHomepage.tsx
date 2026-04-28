@@ -192,23 +192,7 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
 
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
           {isLoyalty && (
-            <div
-              style={{
-                display:         'flex',
-                alignItems:      'center',
-                gap:             '8px',
-                padding:         '4px 12px',
-                backgroundColor: 'var(--color-bg-accent)',
-                fontFamily:      'var(--font-body)',
-                fontSize:        'var(--size-label)',
-                fontWeight:      'var(--font-weight-ui)',
-                color:           'var(--color-text-primary)',
-                letterSpacing:   'var(--tracking-label)',
-              }}
-            >
-              <span>★</span>
-              <span>2,450 PTS</span>
-            </div>
+            <Badge>★ 2,450 PTS</Badge>
           )}
           <Button variant="secondary" size="sm" icon={<span>→</span>}>
             Book a room
