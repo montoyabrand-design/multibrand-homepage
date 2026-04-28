@@ -426,127 +426,67 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
 
       {/* ── BOOK DIRECT & SKIP EXTRAS ───────────────────────── */}
       <SectionWrapper inverse>
-        <div
-          style={{
-            display:  'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap:      '80px',
-            alignItems: 'center',
-          }}
-        >
-          <div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', marginBottom: '-2px' }}>
-                <div
-                  style={{
-                    border:       '2px solid var(--color-text-on-inverse)',
-                    borderRadius: `var(--radius-md) 0 0 0`,
-                    padding:      '10px 18px',
-                    marginRight:  '-2px',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily:    'var(--font-display)',
-                      fontSize:      'var(--size-h1)',
-                      fontWeight:    'var(--font-weight-display)',
-                      lineHeight:    'var(--line-height-h1)',
-                      letterSpacing: 'var(--tracking-h1)',
-                      color:         'var(--color-text-on-inverse)',
-                      whiteSpace:    'nowrap',
-                    }}
-                  >
-                    Book Direct
-                  </span>
-                </div>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <div
-                  style={{
-                    border:       '2px solid var(--color-text-on-inverse)',
-                    borderRadius: `0 0 0 var(--radius-lg)`,
-                    padding:      '10px 18px',
-                    marginRight:  '-2px',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily:    'var(--font-display)',
-                      fontSize:      'var(--size-h1)',
-                      fontWeight:    'var(--font-weight-display)',
-                      lineHeight:    'var(--line-height-h1)',
-                      letterSpacing: 'var(--tracking-h1)',
-                      color:         'var(--color-text-on-inverse)',
-                      whiteSpace:    'nowrap',
-                    }}
-                  >
-                    & Skip Extras
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            {[
-              'Best price guaranteed — always',
-              'Free cancellation on all stays',
-              'No booking fees, ever',
-            ].map((item) => (
-              <div
-                key={item}
-                style={{
-                  display:     'flex',
-                  alignItems:  'center',
-                  gap:         '12px',
-                  fontFamily:  'var(--font-body)',
-                  fontSize:    'var(--size-body-lg)',
-                  fontWeight:  'var(--font-weight-body)',
-                  lineHeight:  'var(--line-height-body-lg)',
-                  color:       'var(--color-text-on-inverse)',
-                }}
-              >
-                <span style={{ color: 'var(--color-text-accent)', flexShrink: 0 }}>✓</span>
-                {item}
-              </div>
-            ))}
-            <div style={{ paddingTop: '8px' }}>
-              <Button variant="secondary" size="md">
-                Book now
-              </Button>
-            </div>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* ── WHERE COMFORT MEETS COMMUNITY ───────────────────── */}
-      <SectionWrapper>
-        <div
-          style={{
-            display:     'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap:         '80px',
-            alignItems:  'center',
-          }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+          {/* Left — heading + subtitle */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
             <div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {['Where Comfort', 'Meets', 'Community'].map((line, i) => (
-                  <span
-                    key={i}
+              {/* Row 1: Book | Direct */}
+              <div style={{ display: 'flex', marginBottom: '-2px' }}>
+                {['Book', 'Direct'].map((word, i) => (
+                  <div
+                    key={word}
                     style={{
-                      fontFamily:    'var(--font-display)',
-                      fontSize:      'var(--size-h1)',
-                      fontWeight:    'var(--font-weight-display)',
-                      lineHeight:    'var(--line-height-h1)',
-                      letterSpacing: 'var(--tracking-h1)',
-                      color:         'var(--color-text-primary)',
-                      display:       'block',
+                      border:       '2px solid var(--color-text-on-inverse)',
+                      borderRadius: i === 0 ? 'var(--radius-md) 0 0 0' : '0 var(--radius-md) 0 0',
+                      padding:      '10px 18px',
+                      marginRight:  '-2px',
                     }}
                   >
-                    {line}
-                  </span>
+                    <span
+                      style={{
+                        fontFamily:    'var(--font-display)',
+                        fontSize:      'var(--size-h1)',
+                        fontWeight:    'var(--font-weight-display)',
+                        lineHeight:    'var(--line-height-h1)',
+                        letterSpacing: 'var(--tracking-h1)',
+                        color:         'var(--color-text-on-inverse)',
+                        whiteSpace:    'nowrap',
+                        display:       'block',
+                      }}
+                    >
+                      {word}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              {/* Row 2: & Skip | Extras */}
+              <div style={{ display: 'flex' }}>
+                {['& Skip', 'Extras'].map((word, i) => (
+                  <div
+                    key={word}
+                    style={{
+                      border:       '2px solid var(--color-text-on-inverse)',
+                      borderRadius: i === 0 ? '0 0 0 var(--radius-lg)' : '0 0 var(--radius-md) 0',
+                      padding:      '10px 18px',
+                      marginRight:  '-2px',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily:    'var(--font-display)',
+                        fontSize:      'var(--size-h1)',
+                        fontWeight:    'var(--font-weight-display)',
+                        lineHeight:    'var(--line-height-h1)',
+                        letterSpacing: 'var(--tracking-h1)',
+                        color:         'var(--color-text-on-inverse)',
+                        whiteSpace:    'nowrap',
+                        display:       'block',
+                      }}
+                    >
+                      {word}
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>
@@ -556,35 +496,242 @@ export function VibeHomepage({ userType }: { userType: UserType }) {
                 fontSize:    'var(--size-body-lg)',
                 fontWeight:  'var(--font-weight-body)',
                 lineHeight:  'var(--line-height-body-lg)',
-                color:       'var(--color-text-secondary)',
+                color:       'var(--color-text-on-inverse)',
                 margin:      0,
+                maxWidth:    '446px',
               }}
             >
-              More than a place to sleep — a place to connect, explore, and feel at home wherever you go.
+              Better rates, built-in perks, and everything you need from the start.
             </p>
-            <a
-              href="#"
-              style={{
-                fontFamily:    'var(--font-body)',
-                fontSize:      'var(--size-body-sm)',
-                fontWeight:    'var(--font-weight-label)',
-                letterSpacing: 'var(--tracking-eyebrow)',
-                color:         'var(--color-text-primary)',
-                textDecoration:'none',
-              }}
-            >
-              LEARN MORE →
-            </a>
           </div>
 
-          <div
-            style={{
-              height:             '560px',
-              backgroundImage:    'url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80)',
-              backgroundSize:     'cover',
-              backgroundPosition: 'center',
-            }}
-          />
+          {/* Right — feature rows */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {[
+              { label: 'BEST RATES',        desc: 'Guaranteed lowest price when you book with us.' },
+              { label: 'FREE COWORKING',    desc: 'Comfortable spaces to work, included in your stay.' },
+              { label: 'GIGABIT WIFI',      desc: 'Fast, reliable internet in every room.' },
+              { label: 'COMMUNITY EVENTS',  desc: 'Meet other travelers through curated local events.' },
+              { label: 'FLEXIBLE CANCEL',   desc: 'Change plans easily when things shift.' },
+            ].map((item, i) => (
+              <div
+                key={item.label}
+                style={{
+                  display:     'flex',
+                  gap:         '32px',
+                  alignItems:  'center',
+                  padding:     '33px 0',
+                  borderTop:   i === 0 ? '1px solid var(--color-border-subtle)' : undefined,
+                  borderBottom:'1px solid var(--color-border-subtle)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily:    'var(--font-body)',
+                    fontSize:      'var(--size-body)',
+                    fontWeight:    'var(--font-weight-ui)',
+                    letterSpacing: '0.66px',
+                    textTransform: 'uppercase',
+                    color:         'var(--color-text-accent)',
+                    width:         '160px',
+                    flexShrink:    0,
+                  }}
+                >
+                  {item.label}
+                </span>
+                <span
+                  style={{
+                    fontFamily:    'var(--font-body)',
+                    fontSize:      'var(--size-label)',
+                    fontWeight:    'var(--font-weight-body)',
+                    letterSpacing: '0.44px',
+                    color:         'var(--color-text-on-inverse)',
+                    textTransform: 'lowercase',
+                  }}
+                >
+                  {item.desc}
+                </span>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </SectionWrapper>
+
+      {/* ── WHERE COMFORT MEETS COMMUNITY ───────────────────── */}
+      <SectionWrapper>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
+
+          {/* Left — text + stats */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {/* Eyebrow */}
+              <span
+                style={{
+                  fontFamily:    'var(--font-body)',
+                  fontSize:      'var(--size-label)',
+                  fontWeight:    'var(--font-weight-body)',
+                  letterSpacing: '0.6px',
+                  textTransform: 'uppercase',
+                  color:         'var(--color-text-secondary)',
+                }}
+              >
+                EXPERIENCE VIBE
+              </span>
+
+              {/* Heading — WordBlocks */}
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {/* Row 1: Where Comfort (tr corner) */}
+                <div style={{ display: 'flex', marginBottom: '-2px' }}>
+                  <div
+                    style={{
+                      border:       '2px solid var(--color-border-default)',
+                      borderRadius: '0 var(--radius-md) 0 0',
+                      padding:      '10px 18px',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily:    'var(--font-display)',
+                        fontSize:      'var(--size-h1)',
+                        fontWeight:    'var(--font-weight-display)',
+                        lineHeight:    'var(--line-height-h1)',
+                        letterSpacing: 'var(--tracking-h1)',
+                        color:         'var(--color-text-primary)',
+                        whiteSpace:    'nowrap',
+                        display:       'block',
+                      }}
+                    >
+                      Where Comfort
+                    </span>
+                  </div>
+                </div>
+                {/* Row 2: Meets (bl) + Community (br) */}
+                <div style={{ display: 'flex' }}>
+                  {[
+                    { word: 'Meets',     radius: '0 0 0 var(--radius-lg)' },
+                    { word: 'Community', radius: '0 0 var(--radius-md) 0' },
+                  ].map(({ word, radius }) => (
+                    <div
+                      key={word}
+                      style={{
+                        border:       '2px solid var(--color-border-default)',
+                        borderRadius: radius,
+                        padding:      '10px 18px',
+                        marginRight:  '-2px',
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily:    'var(--font-display)',
+                          fontSize:      'var(--size-h1)',
+                          fontWeight:    'var(--font-weight-display)',
+                          lineHeight:    'var(--line-height-h1)',
+                          letterSpacing: 'var(--tracking-h1)',
+                          color:         'var(--color-text-primary)',
+                          whiteSpace:    'nowrap',
+                          display:       'block',
+                        }}
+                      >
+                        {word}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Body + CTA */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingTop: '8px' }}>
+                <p
+                  style={{
+                    fontFamily:  'var(--font-body)',
+                    fontSize:    'var(--size-body-lg)',
+                    fontWeight:  'var(--font-weight-body)',
+                    lineHeight:  'var(--line-height-body-lg)',
+                    color:       'var(--color-text-secondary)',
+                    margin:      0,
+                    maxWidth:    '497px',
+                  }}
+                >
+                  Everything you need to feel at home, plus spaces to connect. Stay productive, meet people, or just unwind.
+                </p>
+                <Button variant="primary" size="md" icon={<span>→</span>}>
+                  Join the community
+                </Button>
+              </div>
+            </div>
+
+            {/* Stats row */}
+            <div
+              style={{
+                display:   'flex',
+                gap:       '48px',
+                borderTop: '1px solid var(--color-border-subtle)',
+                paddingTop:'29px',
+              }}
+            >
+              {[
+                { value: '12k+', label: 'GUESTS HOSTED' },
+                { value: '15',   label: 'CITIES' },
+                { value: '4.8',  label: 'AVG RATING' },
+              ].map((stat) => (
+                <div key={stat.label} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <span
+                    style={{
+                      fontFamily:    'var(--font-display)',
+                      fontSize:      '36px',
+                      fontWeight:    'var(--font-weight-display)',
+                      letterSpacing: '-1.08px',
+                      color:         'var(--color-text-primary)',
+                      lineHeight:    'normal',
+                    }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily:    'var(--font-body)',
+                      fontSize:      'var(--size-label)',
+                      fontWeight:    'var(--font-weight-body)',
+                      letterSpacing: '0.6px',
+                      textTransform: 'uppercase',
+                      color:         'var(--color-text-secondary)',
+                    }}
+                  >
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right — photo */}
+          <div style={{ position: 'relative' }}>
+            {/* Lime circle accent */}
+            <div
+              style={{
+                position:     'absolute',
+                width:        '177px',
+                height:       '177px',
+                borderRadius: '50%',
+                backgroundColor: 'var(--color-bg-accent)',
+                top:          '-40px',
+                left:         '-40px',
+                zIndex:       0,
+              }}
+            />
+            <div
+              style={{
+                position:           'relative',
+                zIndex:             1,
+                height:             '700px',
+                backgroundImage:    'url(/vibe/community.jpg)',
+                backgroundSize:     'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+          </div>
+
         </div>
       </SectionWrapper>
 
