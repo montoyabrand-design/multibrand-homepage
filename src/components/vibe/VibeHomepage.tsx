@@ -1,336 +1,718 @@
-import type { UserType } from "@/tokens";
+import type { UserType } from '@/tokens';
+import { HotelCard, type HotelCardProps } from '@/components/shared/HotelCard';
+import { SectionWrapper } from '@/components/shared/SectionWrapper';
+import { Button } from '@/components/shared/Button';
+import { Badge } from '@/components/shared/Badge';
 
-const hotels = [
-  { city: "London", price: "£89/night", rating: "4.6", tags: ["Free WiFi", "Breakfast"], imageUrl: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80" },
-  { city: "Berlin", price: "€74/night", rating: "4.5", tags: ["Free WiFi", "Gym"], imageUrl: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" },
-  { city: "Amsterdam", price: "€99/night", rating: "4.7", tags: ["Free WiFi", "Bar"], imageUrl: "https://images.unsplash.com/photo-1534351590666-13e3e96b5702?w=600&q=80" },
-  { city: "Barcelona", price: "€85/night", rating: "4.8", tags: ["Pool", "Breakfast"], imageUrl: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80" },
+/* ── DATA ─────────────────────────────────────────────────── */
+
+const hotels: (HotelCardProps & { id: string })[] = [
+  {
+    id: 'lisbon',
+    city: 'Lisbon',
+    country: 'Portugal',
+    price: 49,
+    imageUrl: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=80',
+    amenities: [
+      { label: 'Coworking', value: 'Included' },
+      { label: 'Events', value: 'Weekly' },
+      { label: 'Breakfast', value: 'Included' },
+    ],
+    badge: 'POPULAR',
+  },
+  {
+    id: 'medellin',
+    city: 'Medellín',
+    country: 'Colombia',
+    price: 29,
+    imageUrl: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5702?w=800&q=80',
+    amenities: [
+      { label: 'Coworking', value: 'Included' },
+      { label: 'Events', value: 'Weekly' },
+      { label: 'Breakfast', value: 'Included' },
+    ],
+    badge: 'POPULAR',
+  },
+  {
+    id: 'buenos-aires',
+    city: 'Buenos Aires',
+    country: 'Argentina',
+    price: 39,
+    imageUrl: 'https://images.unsplash.com/photo-1583622451288-24819b098f08?w=800&q=80',
+    amenities: [
+      { label: 'Coworking', value: 'Available' },
+      { label: 'Events', value: 'Weekly' },
+      { label: 'Breakfast', value: 'Included' },
+    ],
+  },
+  {
+    id: 'madrid',
+    city: 'Madrid',
+    country: 'Spain',
+    price: 49,
+    imageUrl: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&q=80',
+    amenities: [
+      { label: 'Coworking', value: 'Available' },
+      { label: 'Events', value: 'Weekly' },
+      { label: 'Breakfast', value: 'Extra' },
+    ],
+  },
+  {
+    id: 'mexico-city',
+    city: 'Mexico City',
+    country: 'Mexico',
+    price: 39,
+    imageUrl: 'https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?w=800&q=80',
+    amenities: [
+      { label: 'Coworking', value: 'Included' },
+      { label: 'Events', value: 'Bi-Weekly' },
+      { label: 'Breakfast', value: 'Included' },
+    ],
+  },
+  {
+    id: 'sao-paulo',
+    city: 'São Paulo',
+    country: 'Brazil',
+    price: 49,
+    imageUrl: 'https://images.unsplash.com/photo-1545060894-6e1dd6a1c15f?w=800&q=80',
+    amenities: [
+      { label: 'Coworking', value: 'Included' },
+      { label: 'Events', value: 'Bi-Weekly' },
+      { label: 'Breakfast', value: 'Extra' },
+    ],
+  },
 ];
 
-export function VibeHomepage({ userType }: { userType: UserType }) {
+const amenitiesList = [
+  { icon: '📶', label: 'Free WiFi' },
+  { icon: '🥐', label: 'Breakfast' },
+  { icon: '🏋', label: 'Gym' },
+  { icon: '🚗', label: 'Parking' },
+  { icon: '🐾', label: 'Pet-friendly' },
+  { icon: '🍸', label: 'Bar' },
+];
+
+/* ── HEADING BLOCK ─────────────────────────────────────────── */
+
+type WordBlockProps = {
+  word: string;
+  corners: {
+    tl?: boolean;
+    tr?: boolean;
+    bl?: boolean;
+    br?: boolean;
+  };
+  size?: 'display' | 'h1';
+};
+
+function WordBlock({ word, corners, size = 'display' }: WordBlockProps) {
+  const fontSize    = size === 'display' ? 'var(--size-display)' : 'var(--size-h1)';
+  const lineHeight  = size === 'display' ? 'var(--line-height-display)' : 'var(--line-height-h1)';
+  const tracking    = size === 'display' ? 'var(--tracking-display)' : 'var(--tracking-h1)';
+  const radius      = `${corners.tl ? 'var(--radius-md)' : '0'} ${corners.tr ? 'var(--radius-md)' : '0'} ${corners.br ? 'var(--radius-md)' : '0'} ${corners.bl ? 'var(--radius-lg)' : '0'}`;
+
   return (
-    <main
-      className="flex flex-col w-full min-h-screen"
-      style={{ backgroundColor: "var(--color-bg-page)" }}
+    <div
+      style={{
+        border:       '2px solid var(--color-border-default)',
+        borderRadius: radius,
+        padding:      size === 'display' ? '14px' : '10px 18px',
+        marginRight:  '-2px',
+        marginBottom: '-2px',
+      }}
     >
-      {/* ── NAVIGATION ─────────────────────────────────────── */}
-      <nav
-        className="flex items-center justify-between px-16 py-4 border-b"
+      <span
         style={{
-          backgroundColor: "var(--color-bg-page)",
-          borderColor: "var(--color-border-default)",
+          fontFamily:    'var(--font-display)',
+          fontSize,
+          fontWeight:    'var(--font-weight-display)',
+          lineHeight,
+          letterSpacing: tracking,
+          color:         'var(--color-text-primary)',
+          display:       'block',
+          whiteSpace:    'nowrap',
+        }}
+      >
+        {word}
+      </span>
+    </div>
+  );
+}
+
+/* ── COMPONENT ─────────────────────────────────────────────── */
+
+export function VibeHomepage({ userType }: { userType: UserType }) {
+  const isLoyalty = userType === 'loyalty';
+
+  return (
+    <main style={{ display: 'flex', flexDirection: 'column', width: '100%', minHeight: '100vh', backgroundColor: 'var(--color-bg-page)' }}>
+
+      {/* ── NAV ─────────────────────────────────────────────── */}
+      <nav
+        style={{
+          display:         'flex',
+          alignItems:      'center',
+          justifyContent:  'space-between',
+          padding:         '20px 48px',
+          backgroundColor: 'var(--color-bg-page)',
+          borderBottom:    '1px solid var(--color-border-default)',
         }}
       >
         <span
-          className="text-[20px] font-bold tracking-tight"
-          style={{ fontFamily: "var(--font-heading)", color: "var(--color-text-primary)" }}
+          style={{
+            fontFamily:    'var(--font-display)',
+            fontSize:      '20px',
+            fontWeight:    'var(--font-weight-display)',
+            letterSpacing: '1px',
+            color:         'var(--color-text-primary)',
+          }}
         >
           VIBE
         </span>
-        <div className="flex items-center gap-8">
-          {["Hotels", "Destinations", "Deals", "About"].map((item) => (
+
+        <div style={{ display: 'flex', gap: '0', alignItems: 'center' }}>
+          {['CITIES', 'WHY VIBE', 'COMMUNITY', 'AMMENITIES'].map((item) => (
             <a
               key={item}
               href="#"
-              className="text-[14px] hover:opacity-70 transition-opacity"
-              style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)" }}
+              style={{
+                fontFamily:    'var(--font-body)',
+                fontSize:      'var(--size-body-sm)',
+                fontWeight:    'var(--font-weight-body)',
+                letterSpacing: 'var(--tracking-nav)',
+                color:         'var(--color-text-primary)',
+                padding:       '8px 16px',
+                textDecoration:'none',
+              }}
             >
               {item}
             </a>
           ))}
         </div>
-        <div className="flex items-center gap-3">
-          {userType === "loyalty" && (
+
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          {isLoyalty && (
             <div
-              className="flex items-center gap-2 px-3 py-1 rounded-full text-[13px] font-medium"
               style={{
-                backgroundColor: "var(--color-bg-inverse)",
-                color: "var(--color-text-on-inverse)",
-                fontFamily: "var(--font-body)",
+                display:         'flex',
+                alignItems:      'center',
+                gap:             '8px',
+                padding:         '4px 12px',
+                backgroundColor: 'var(--color-bg-accent)',
+                fontFamily:      'var(--font-body)',
+                fontSize:        'var(--size-label)',
+                fontWeight:      'var(--font-weight-ui)',
+                color:           'var(--color-text-primary)',
+                letterSpacing:   'var(--tracking-label)',
               }}
             >
-              <span>⭐</span>
-              <span>2,450 pts</span>
+              <span>★</span>
+              <span>2,450 PTS</span>
             </div>
           )}
-          <button
-            className="px-4 py-2 rounded-lg text-[14px] font-medium"
-            style={{
-              backgroundColor: "var(--color-action-primary-bg)",
-              color: "var(--color-action-primary-fg)",
-              fontFamily: "var(--font-ui)",
-            }}
-          >
-            Sign in
-          </button>
+          <Button variant="secondary" size="sm" icon={<span>→</span>}>
+            Book a room
+          </Button>
         </div>
       </nav>
 
-      {/* ── HERO / BOOKING ─────────────────────────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────── */}
       <section
-        className="relative flex flex-col items-center justify-center text-center overflow-hidden"
         style={{
-          backgroundColor: "var(--color-bg-inverse)",
-          paddingTop: "var(--section-v)",
-          paddingBottom: "var(--section-v)",
-          minHeight: "420px",
+          display:         'flex',
+          gap:             '48px',
+          alignItems:      'center',
+          paddingTop:      '80px',
+          paddingBottom:   '40px',
+          paddingLeft:     '48px',
+          paddingRight:    '48px',
+          backgroundColor: 'var(--color-bg-page)',
         }}
       >
-        {userType === "loyalty" ? (
-          <>
-            {/* Loyalty: points + quick book */}
-            <div
-              className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-3 px-5 py-2 rounded-full border text-[13px]"
-              style={{
-                borderColor: "var(--color-text-accent-warm)",
-                color: "var(--color-text-accent-warm)",
-                fontFamily: "var(--font-body)",
-              }}
-            >
-              <span>⭐ You have 2,450 points — enough for a free night!</span>
-            </div>
-            <h1
-              className="mb-2 font-semibold"
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "var(--size-h1)",
-                color: "var(--color-text-on-inverse)",
-                letterSpacing: "var(--tracking-h1)",
-              }}
-            >
-              Welcome back, Alex
-            </h1>
-            <p
-              className="mb-8 text-[16px]"
-              style={{ fontFamily: "var(--font-body)", color: "var(--color-text-on-inverse-muted)" }}
-            >
-              Your next stay in Berlin is 3 days away.
-            </p>
-          </>
-        ) : (
-          <>
-            <h1
-              className="mb-3 font-semibold"
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "var(--size-h1)",
-                color: "var(--color-text-on-inverse)",
-                letterSpacing: "var(--tracking-h1)",
-              }}
-            >
-              Find your stay
-            </h1>
-            <p
-              className="mb-8 text-[16px]"
-              style={{ fontFamily: "var(--font-body)", color: "var(--color-text-on-inverse-muted)" }}
-            >
-              Great hotels. Great prices. No surprises.
-            </p>
-          </>
-        )}
-
-        {/* Booking bar */}
         <div
-          className="flex items-center gap-0 rounded-xl overflow-hidden shadow-xl"
-          style={{ backgroundColor: "var(--color-bg-page)" }}
+          style={{
+            flex:          1,
+            display:       'flex',
+            flexDirection: 'column',
+            gap:           '48px',
+            paddingBottom: '64px',
+          }}
         >
-          {[
-            { label: "Where to?", placeholder: "City or hotel" },
-            { label: "Check-in", placeholder: "Add date" },
-            { label: "Check-out", placeholder: "Add date" },
-            { label: "Guests", placeholder: "2 guests" },
-          ].map((field, i) => (
-            <div
-              key={field.label}
-              className="flex flex-col px-6 py-4 border-r"
-              style={{
-                borderColor: "var(--color-border-default)",
-                minWidth: "180px",
-              }}
-            >
-              <span
-                className="text-[11px] font-semibold tracking-[1px] uppercase mb-1"
-                style={{ fontFamily: "var(--font-body)", color: "var(--color-text-primary)" }}
-              >
-                {field.label}
-              </span>
-              <span
-                className="text-[14px]"
-                style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)" }}
-              >
-                {field.placeholder}
-              </span>
-            </div>
-          ))}
-          <button
-            className="px-8 py-6 text-[15px] font-semibold transition-opacity hover:opacity-90"
+          <span
             style={{
-              backgroundColor: "var(--color-action-primary-bg)",
-              color: "var(--color-action-primary-fg)",
-              fontFamily: "var(--font-ui)",
+              fontFamily:    'var(--font-display)',
+              fontSize:      'var(--size-body)',
+              fontWeight:    'var(--font-weight-subheading)',
+              letterSpacing: 'var(--tracking-eyebrow)',
+              color:         'var(--color-text-secondary)',
             }}
           >
-            Search
-          </button>
+            {isLoyalty
+              ? '★ 2,450 POINTS — ENOUGH FOR A FREE NIGHT!'
+              : '15 CITIES · URBAN STYLE · EST. 2024'}
+          </span>
+
+          <div>
+            {isLoyalty ? (
+              <div>
+                <div style={{ display: 'flex', marginBottom: '-2px' }}>
+                  <WordBlock word="Welcome" corners={{ tl: true }} />
+                  <WordBlock word="back," corners={{ tr: true }} />
+                </div>
+                <div style={{ display: 'flex' }}>
+                  <WordBlock word="Alex" corners={{ bl: true }} />
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div style={{ display: 'flex', marginBottom: '-2px' }}>
+                  <WordBlock word="Stay" corners={{ tl: true }} />
+                  <WordBlock word="Smart," corners={{ tr: true }} />
+                </div>
+                <div style={{ display: 'flex' }}>
+                  <WordBlock word="Travel" corners={{ bl: true }} />
+                  <WordBlock word="Bold" corners={{ br: true }} />
+                </div>
+              </div>
+            )}
+          </div>
+
+          <p
+            style={{
+              fontFamily:  'var(--font-body)',
+              fontSize:    'var(--size-body-lg)',
+              fontWeight:  'var(--font-weight-body)',
+              lineHeight:  'var(--line-height-body-lg)',
+              color:       'var(--color-text-secondary)',
+              maxWidth:    '503px',
+              margin:      0,
+            }}
+          >
+            {isLoyalty
+              ? 'Your next stay in Berlin is 3 days away. Ready to explore more?'
+              : 'Everything you need. Nothing you don\'t.\nAffordable stays in top locations, ready when you are.'}
+          </p>
+
+          <Button variant="secondary" size="md">
+            {isLoyalty ? 'Manage my stays' : 'Find your stay'}
+          </Button>
+        </div>
+
+        <div
+          style={{
+            width:    '709px',
+            height:   '808px',
+            flexShrink: 0,
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            style={{
+              width:               '100%',
+              height:              '100%',
+              backgroundImage:     'url(https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80)',
+              backgroundSize:      'cover',
+              backgroundPosition:  'center',
+            }}
+          />
+          <div
+            style={{
+              position:   'absolute',
+              inset:      0,
+              background: 'linear-gradient(to bottom, rgba(26,26,24,0.9) 0%, rgba(102,102,102,0) 27%)',
+            }}
+          />
+          <div
+            style={{
+              position:      'absolute',
+              top:           '16px',
+              left:          '16px',
+              display:       'flex',
+              flexDirection: 'column',
+              gap:           '2px',
+              letterSpacing: 'var(--tracking-eyebrow)',
+            }}
+          >
+            <span
+              style={{
+                fontFamily:  'var(--font-display)',
+                fontSize:    'var(--size-h5)',
+                fontWeight:  'var(--font-weight-subheading)',
+                color:       'var(--color-text-on-inverse)',
+              }}
+            >
+              BUENOS AIRES,
+            </span>
+            <span
+              style={{
+                fontFamily:  'var(--font-body)',
+                fontSize:    'var(--size-body)',
+                fontWeight:  'var(--font-weight-body)',
+                color:       'var(--color-text-on-inverse)',
+              }}
+            >
+              Santelmo Area
+            </span>
+          </div>
+          <div
+            style={{
+              position:        'absolute',
+              bottom:          '120px',
+              left:            '-16px',
+              backgroundColor: 'var(--color-text-accent-warm)',
+              padding:         '24px 32px',
+              borderTopRightRadius: 'var(--radius-md)',
+              display:         'flex',
+              flexDirection:   'column',
+              gap:             '4px',
+              color:           'var(--color-text-primary)',
+            }}
+          >
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--size-body)', lineHeight: 'var(--line-height-body)' }}>From</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--size-h2)', fontWeight: 'var(--font-weight-display)', letterSpacing: '-2px' }}>$49</span>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--size-body)', lineHeight: 'var(--line-height-body)' }}>/night</span>
+          </div>
+          <div style={{ position: 'absolute', bottom: '120px', left: '145px' }}>
+            <Button variant="primary" size="md" icon={<span>→</span>}>
+              Book now
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* ── TRUST SIGNALS (first-time only) ────────────────── */}
-      {userType === "first-time" && (
+      {/* ── TRUST SIGNALS (first-time only) ─────────────────── */}
+      {!isLoyalty && (
         <div
-          className="flex items-center justify-center gap-12 py-6 border-b"
-          style={{ borderColor: "var(--color-border-default)" }}
+          style={{
+            display:        'flex',
+            justifyContent: 'center',
+            gap:            '48px',
+            padding:        '24px 48px',
+            borderBottom:   '1px solid var(--color-border-default)',
+          }}
         >
           {[
-            { icon: "⭐", text: "4.7 average rating" },
-            { icon: "🏨", text: "500+ hotels worldwide" },
-            { icon: "🔒", text: "Best price guarantee" },
-            { icon: "💬", text: "24/7 support" },
-          ].map((trust) => (
-            <div key={trust.text} className="flex items-center gap-2">
-              <span className="text-lg">{trust.icon}</span>
+            { icon: '★', text: '4.7 average rating' },
+            { icon: '🏨', text: '500+ hotels worldwide' },
+            { icon: '🔒', text: 'Best price guarantee' },
+            { icon: '💬', text: '24/7 support' },
+          ].map((item) => (
+            <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span>{item.icon}</span>
               <span
-                className="text-[13px] font-medium"
-                style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)" }}
+                style={{
+                  fontFamily:  'var(--font-body)',
+                  fontSize:    'var(--size-body-sm)',
+                  fontWeight:  'var(--font-weight-label)',
+                  color:       'var(--color-text-secondary)',
+                }}
               >
-                {trust.text}
+                {item.text}
               </span>
             </div>
           ))}
         </div>
       )}
 
-      {/* ── LOYALTY: NEXT STAY CARD ─────────────────────────── */}
-      {userType === "loyalty" && (
-        <section
-          className="px-16 py-8"
-          style={{ backgroundColor: "var(--color-bg-surface)" }}
+      {/* ── EXPLORE CITIES ──────────────────────────────────── */}
+      <SectionWrapper>
+        <div style={{ display: 'flex', marginBottom: '40px' }}>
+          <WordBlock word="Explore" corners={{ tl: true }} size="h1" />
+          <WordBlock word={isLoyalty ? 'Your Stays' : 'Cities'} corners={{ br: true }} size="h1" />
+        </div>
+
+        <div
+          style={{
+            display:             'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap:                 'var(--card-gap)',
+          }}
         >
-          <h2
-            className="text-[18px] font-semibold mb-4"
-            style={{ fontFamily: "var(--font-heading)", color: "var(--color-text-primary)" }}
-          >
-            Your upcoming stay
-          </h2>
-          <div
-            className="flex items-center gap-6 p-5 rounded-xl border"
+          {hotels.map(({ id, ...cardProps }) => (
+            <HotelCard key={id} {...cardProps} />
+          ))}
+        </div>
+
+        <div
+          style={{
+            display:        'flex',
+            justifyContent: 'center',
+            paddingTop:     '32px',
+          }}
+        >
+          <a
+            href="#"
             style={{
-              backgroundColor: "var(--color-bg-page)",
-              borderColor: "var(--color-border-default)",
+              display:       'inline-flex',
+              alignItems:    'center',
+              gap:           '8px',
+              fontFamily:    'var(--font-body)',
+              fontSize:      'var(--size-body-sm)',
+              fontWeight:    'var(--font-weight-label)',
+              letterSpacing: 'var(--tracking-eyebrow)',
+              color:         'var(--color-text-primary)',
+              textDecoration:'none',
             }}
           >
-            <div
-              className="w-24 h-20 rounded-lg bg-cover bg-center shrink-0"
-              style={{ backgroundImage: `url(${hotels[1].imageUrl})` }}
-            />
-            <div className="flex flex-col gap-1">
-              <span className="text-[16px] font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--color-text-primary)" }}>
-                Vibe Berlin
-              </span>
-              <span className="text-[13px]" style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)" }}>
-                Apr 25 – Apr 28 · 2 guests
-              </span>
-              <span className="text-[13px] font-medium" style={{ fontFamily: "var(--font-body)", color: "var(--color-text-accent)" }}>
-                Check-in in 3 days
-              </span>
-            </div>
-            <button
-              className="ml-auto px-5 py-2 rounded-lg text-[13px] font-medium border transition-colors"
-              style={{
-                borderColor: "var(--color-action-primary-bg)",
-                color: "var(--color-action-primary-bg)",
-                fontFamily: "var(--font-ui)",
-              }}
-            >
-              Manage booking
-            </button>
-          </div>
-        </section>
-      )}
+            DISCOVER MORE CITIES <span>→</span>
+          </a>
+        </div>
+      </SectionWrapper>
 
-      {/* ── HOTELS GRID ────────────────────────────────────── */}
-      <section
-        className="px-16"
-        style={{
-          paddingTop: "var(--section-v)",
-          paddingBottom: "var(--section-v)",
-        }}
-      >
-        <h2
-          className="text-[24px] font-semibold mb-6"
-          style={{ fontFamily: "var(--font-heading)", color: "var(--color-text-primary)" }}
+      {/* ── BOOK DIRECT & SKIP EXTRAS ───────────────────────── */}
+      <SectionWrapper inverse>
+        <div
+          style={{
+            display:  'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap:      '80px',
+            alignItems: 'center',
+          }}
         >
-          {userType === "loyalty" ? "Based on your past stays" : "Popular destinations"}
-        </h2>
-        <div className="grid grid-cols-4 gap-4">
-          {hotels.map((hotel) => (
-            <article
-              key={hotel.city}
-              className="flex flex-col rounded-xl overflow-hidden border transition-shadow hover:shadow-lg"
-              style={{ borderColor: "var(--color-border-default)", backgroundColor: "var(--color-bg-page)" }}
-            >
-              <div
-                className="h-44 bg-cover bg-center"
-                style={{ backgroundImage: `url(${hotel.imageUrl})` }}
-              />
-              <div className="p-4 flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <h3
-                    className="text-[16px] font-semibold"
-                    style={{ fontFamily: "var(--font-heading)", color: "var(--color-text-primary)" }}
-                  >
-                    {hotel.city}
-                  </h3>
+          <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ display: 'flex', marginBottom: '-2px' }}>
+                <div
+                  style={{
+                    border:       '2px solid var(--color-text-on-inverse)',
+                    borderRadius: `var(--radius-md) 0 0 0`,
+                    padding:      '10px 18px',
+                    marginRight:  '-2px',
+                  }}
+                >
                   <span
-                    className="text-[13px] flex items-center gap-1"
-                    style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)" }}
+                    style={{
+                      fontFamily:    'var(--font-display)',
+                      fontSize:      'var(--size-h1)',
+                      fontWeight:    'var(--font-weight-display)',
+                      lineHeight:    'var(--line-height-h1)',
+                      letterSpacing: 'var(--tracking-h1)',
+                      color:         'var(--color-text-on-inverse)',
+                      whiteSpace:    'nowrap',
+                    }}
                   >
-                    ⭐ {hotel.rating}
+                    Book Direct
                   </span>
                 </div>
-                <div className="flex gap-2 flex-wrap">
-                  {hotel.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] px-2 py-1 rounded-full"
-                      style={{
-                        backgroundColor: "var(--color-bg-surface)",
-                        color: "var(--color-text-secondary)",
-                        fontFamily: "var(--font-body)",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <p
-                  className="text-[15px] font-semibold mt-1"
-                  style={{ fontFamily: "var(--font-body)", color: "var(--color-text-primary)" }}
-                >
-                  {hotel.price}
-                </p>
               </div>
-            </article>
+              <div style={{ display: 'flex' }}>
+                <div
+                  style={{
+                    border:       '2px solid var(--color-text-on-inverse)',
+                    borderRadius: `0 0 0 var(--radius-lg)`,
+                    padding:      '10px 18px',
+                    marginRight:  '-2px',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily:    'var(--font-display)',
+                      fontSize:      'var(--size-h1)',
+                      fontWeight:    'var(--font-weight-display)',
+                      lineHeight:    'var(--line-height-h1)',
+                      letterSpacing: 'var(--tracking-h1)',
+                      color:         'var(--color-text-on-inverse)',
+                      whiteSpace:    'nowrap',
+                    }}
+                  >
+                    & Skip Extras
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {[
+              'Best price guaranteed — always',
+              'Free cancellation on all stays',
+              'No booking fees, ever',
+            ].map((item) => (
+              <div
+                key={item}
+                style={{
+                  display:     'flex',
+                  alignItems:  'center',
+                  gap:         '12px',
+                  fontFamily:  'var(--font-body)',
+                  fontSize:    'var(--size-body-lg)',
+                  fontWeight:  'var(--font-weight-body)',
+                  lineHeight:  'var(--line-height-body-lg)',
+                  color:       'var(--color-text-on-inverse)',
+                }}
+              >
+                <span style={{ color: 'var(--color-text-accent)', flexShrink: 0 }}>✓</span>
+                {item}
+              </div>
+            ))}
+            <div style={{ paddingTop: '8px' }}>
+              <Button variant="secondary" size="md">
+                Book now
+              </Button>
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* ── WHERE COMFORT MEETS COMMUNITY ───────────────────── */}
+      <SectionWrapper>
+        <div
+          style={{
+            display:     'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap:         '80px',
+            alignItems:  'center',
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+            <div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {['Where Comfort', 'Meets', 'Community'].map((line, i) => (
+                  <span
+                    key={i}
+                    style={{
+                      fontFamily:    'var(--font-display)',
+                      fontSize:      'var(--size-h1)',
+                      fontWeight:    'var(--font-weight-display)',
+                      lineHeight:    'var(--line-height-h1)',
+                      letterSpacing: 'var(--tracking-h1)',
+                      color:         'var(--color-text-primary)',
+                      display:       'block',
+                    }}
+                  >
+                    {line}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <p
+              style={{
+                fontFamily:  'var(--font-body)',
+                fontSize:    'var(--size-body-lg)',
+                fontWeight:  'var(--font-weight-body)',
+                lineHeight:  'var(--line-height-body-lg)',
+                color:       'var(--color-text-secondary)',
+                margin:      0,
+              }}
+            >
+              More than a place to sleep — a place to connect, explore, and feel at home wherever you go.
+            </p>
+            <a
+              href="#"
+              style={{
+                fontFamily:    'var(--font-body)',
+                fontSize:      'var(--size-body-sm)',
+                fontWeight:    'var(--font-weight-label)',
+                letterSpacing: 'var(--tracking-eyebrow)',
+                color:         'var(--color-text-primary)',
+                textDecoration:'none',
+              }}
+            >
+              LEARN MORE →
+            </a>
+          </div>
+
+          <div
+            style={{
+              height:             '560px',
+              backgroundImage:    'url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80)',
+              backgroundSize:     'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        </div>
+      </SectionWrapper>
+
+      {/* ── AMENITIES ────────────────────────────────────────── */}
+      <SectionWrapper>
+        <div style={{ display: 'flex', marginBottom: '48px' }}>
+          <WordBlock word="Amenities" corners={{ tl: true, br: true }} size="h1" />
+        </div>
+
+        <div
+          style={{
+            display:             'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap:                 '24px 48px',
+          }}
+        >
+          {amenitiesList.map((item) => (
+            <div
+              key={item.label}
+              style={{
+                display:      'flex',
+                alignItems:   'center',
+                gap:          '12px',
+                paddingBottom:'24px',
+                borderBottom: '1px solid var(--color-border-subtle)',
+              }}
+            >
+              <span style={{ fontSize: '24px' }}>{item.icon}</span>
+              <span
+                style={{
+                  fontFamily:  'var(--font-body)',
+                  fontSize:    'var(--size-body-lg)',
+                  fontWeight:  'var(--font-weight-body)',
+                  color:       'var(--color-text-primary)',
+                }}
+              >
+                {item.label}
+              </span>
+            </div>
           ))}
         </div>
-      </section>
+      </SectionWrapper>
 
-      {/* ── FOOTER ─────────────────────────────────────────── */}
+      {/* ── FOOTER ───────────────────────────────────────────── */}
       <footer
-        className="flex items-center justify-between px-16 py-6 border-t text-[12px]"
         style={{
-          borderColor: "var(--color-border-default)",
-          fontFamily: "var(--font-body)",
-          color: "var(--color-text-secondary)",
+          display:         'flex',
+          alignItems:      'center',
+          justifyContent:  'space-between',
+          padding:         '24px 48px',
+          borderTop:       '1px solid var(--color-border-default)',
+          backgroundColor: 'var(--color-bg-page)',
         }}
       >
-        <span>© 2026 Vibe Hotels. Part of Skyline Group.</span>
-        <div className="flex gap-6">
-          {["Privacy", "Terms", "Cookies", "Help"].map((l) => (
-            <a key={l} href="#" className="hover:opacity-80 transition-opacity">{l}</a>
+        <span
+          style={{
+            fontFamily:    'var(--font-display)',
+            fontSize:      'var(--size-h4)',
+            fontWeight:    'var(--font-weight-display)',
+            letterSpacing: '1px',
+            color:         'var(--color-text-primary)',
+          }}
+        >
+          VIBE
+        </span>
+        <span
+          style={{
+            fontFamily:  'var(--font-body)',
+            fontSize:    'var(--size-body-sm)',
+            color:       'var(--color-text-secondary)',
+          }}
+        >
+          © 2026 Skyline Group
+        </span>
+        <div style={{ display: 'flex', gap: '24px' }}>
+          {['Privacy', 'Terms', 'Cookies', 'Help'].map((l) => (
+            <a
+              key={l}
+              href="#"
+              style={{
+                fontFamily:    'var(--font-body)',
+                fontSize:      'var(--size-body-sm)',
+                color:         'var(--color-text-secondary)',
+                textDecoration:'none',
+              }}
+            >
+              {l}
+            </a>
           ))}
         </div>
       </footer>
+
     </main>
   );
 }
