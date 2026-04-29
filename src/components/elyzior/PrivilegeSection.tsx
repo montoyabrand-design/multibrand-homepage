@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import type { UserType } from "@/tokens";
 import { fadeUp, scaleIn, staggerContainer, staggerContainerDelayed, VP } from "./animations";
-import { Button } from "./Button";
+import { Button } from "@/components/shared/Button";
 
 const pillars = [
   {
@@ -162,7 +162,7 @@ export function PrivilegeSection({ userType }: { userType: UserType }) {
         className="flex items-center justify-center pt-14 pb-20 max-sm:px-6"
         style={{ backgroundColor: "var(--color-bg-inverse-deepest)" }}
       >
-        <Button hierarchy="tertiary" size="large" className="max-sm:w-full max-sm:justify-center">
+        <Button brand="elyzior" variant="tertiary" size="lg" className="max-sm:w-full max-sm:justify-center">
           {userType === "loyalty" ? "VIEW YOUR BENEFITS" : "REQUEST AN INVITATION"}
         </Button>
       </motion.div>

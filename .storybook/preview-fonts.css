@@ -1,0 +1,9 @@
+/* Replaces next/font/google CSS variable injection for Storybook */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Libre+Franklin:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-geist:              'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-instrument-serif:   'Instrument Serif', serif;
+  --font-libre-franklin:     'Libre Franklin', sans-serif;
+  --font-sora:               'Sora', sans-serif;
+}

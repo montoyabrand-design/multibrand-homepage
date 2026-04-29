@@ -119,6 +119,7 @@
   /* Backgrounds */
   --color-bg-page:              #ffffff;
   --color-bg-surface:           #f8fafc;
+  --color-bg-subtle:            #f3f3f1;
   --color-bg-inverse:           #1a1a18;
   --color-bg-inverse-deep:      #111110;
   --color-bg-inverse-deepest:   #080807;
@@ -170,6 +171,7 @@
   --font-weight-label:      500;
 
   /* Type scale */
+  --size-wordmark: 112px;
   --size-display:  96px;
   --size-h1:       72px;
   --size-h2:       40px;
@@ -181,17 +183,25 @@
   --size-body-sm:  14px;
   --size-label:    12px;
   --size-micro:    11px;
+  --size-nano:     10px;
 
   /* Tracking */
-  --tracking-display:  -3.84px;
-  --tracking-h1:       -2.16px;
-  --tracking-h2:       0px;
-  --tracking-eyebrow:  4px;
-  --tracking-nav:      1.12px;
-  --tracking-button:   1.92px;
-  --tracking-body-sm:  1.68px;
-  --tracking-label:    0.4px;
-  --tracking-body:     0px;
+  --tracking-display:       -3.84px;
+  --tracking-h1:            -2.16px;
+  --tracking-h2:             0px;
+  --tracking-eyebrow:        4px;
+  --tracking-eyebrow-sm:     0.6px;
+  --tracking-nav:            1.12px;
+  --tracking-button:         1.92px;
+  --tracking-body-sm:        1.68px;
+  --tracking-label:          0.4px;
+  --tracking-body:           0px;
+  --tracking-feature-label:  0.66px;
+  --tracking-feature-desc:   0.44px;
+  --tracking-stat:          -1.08px;
+  --tracking-footer-label:   0.8px;
+  --tracking-price:         -2px;
+  --tracking-wordmark:      -4px;
 
   /* Line heights */
   --line-height-display:  96px;

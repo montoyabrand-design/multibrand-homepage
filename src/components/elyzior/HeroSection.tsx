@@ -2,7 +2,7 @@
 
 import { useScroll, useTransform, motion } from 'framer-motion';
 import type { UserType } from "@/tokens";
-import { Navigation } from "./Navigation";
+import { Header } from "@/components/shared/Header";
 import { EASE, slowZoom } from "./animations";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -55,7 +55,7 @@ export function HeroSection({ userType }: { userType: UserType }) {
         }}
       />
 
-      <Navigation userType={userType} />
+      <Header brand="elyzior" userType={userType} />
 
       {/* Scroll-exit wrapper — opacity and y driven by scroll position */}
       <motion.div

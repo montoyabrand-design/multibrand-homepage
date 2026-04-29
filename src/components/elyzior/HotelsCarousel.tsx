@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
 import type { UserType } from "@/tokens";
-import { HotelCard } from "./HotelCard";
+import { HotelCard } from "@/components/shared/HotelCard";
 import { fadeUp, staggerContainer, staggerContainerDelayed, VP } from "./animations";
 
 const hotels = [
@@ -115,7 +115,7 @@ export function HotelsCarousel({ userType }: { userType: UserType }) {
       >
         {orderedHotels.map((hotel) => (
           <motion.div key={hotel.city} variants={fadeUp} className="max-sm:snap-start max-sm:shrink-0">
-            <HotelCard {...hotel} />
+            <HotelCard brand="elyzior" {...hotel} />
           </motion.div>
         ))}
       </motion.div>
